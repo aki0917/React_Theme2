@@ -1,4 +1,6 @@
 import React,{useState} from 'react';
+import { useDispatch } from 'react-redux'; 
+import { setAnswer } from './surveySlice'; 
 import { Navigate, useNavigate } from 'react-router-dom';
 
 const questions = [
@@ -8,11 +10,15 @@ const questions = [
 ];
 
 const Survey = () => {
+  const dispatch = useDispatch();
+
   const [maxDisplayedQuestionIndex, setMaxDisplayedQuestionIndex] = useState(0);
   const [answers, setAnswers] = useState<(string | null)[]>(new Array(questions.length).fill(null));
   const navigate = useNavigate();
 
   const handleAnswer = (index: number, answer: string) => {
+    dispatch(setAnswer({ index, answer }));
+    
     const newAnswers = [...answers];
     newAnswers[index] = answer;
     setAnswers(newAnswers);
