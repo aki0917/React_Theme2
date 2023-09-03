@@ -2,9 +2,10 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from './store';
 import { useNavigate } from "react-router-dom";
+import { QUESTIONS } from './constants';
 
 const Confirmation = () => {
-  const { gender, year, month, day, question1, answers, consultationContent } = useSelector((state: RootState) => state.survey);
+  const { gender, year, month, day, answers, consultationContent } = useSelector((state: RootState) => state.survey);
 
   const navigate = useNavigate();
 
@@ -27,7 +28,7 @@ const Confirmation = () => {
         <strong>生年月日:</strong> {year}年{month}月{day}日
       </div>
       <div>
-        {question1.map((question: string, index: number) => (
+        {QUESTIONS.map((question: string, index: number) => (
           <div key={index}>
             <strong>{question}:</strong> {answers[index] === 'はい' ? 'はい' : 'いいえ'}
           </div>
